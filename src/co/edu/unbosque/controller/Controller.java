@@ -3,6 +3,7 @@ package co.edu.unbosque.controller;
 import co.edu.unbosque.model.BinomialCof;
 import co.edu.unbosque.model.Floyd;
 import co.edu.unbosque.model.MatrixChainMultiplication;
+import co.edu.unbosque.model.TravellerAlgorithm;
 import co.edu.unbosque.view.View;
 
 public class Controller {
@@ -10,12 +11,14 @@ public class Controller {
 	private Floyd floyd;
 	private BinomialCof bino;
 	private MatrixChainMultiplication matrix;
+	private TravellerAlgorithm traveller;
 	private View view;
 
 	public Controller() {
 		floyd = new Floyd();
 		bino = new BinomialCof();
 		matrix = new MatrixChainMultiplication();
+		traveller = new TravellerAlgorithm();
 		view = new View();
 		run();
 	}
@@ -29,7 +32,7 @@ public class Controller {
 		String option = view.readData();
 		switch (option) {
 		case "1":
-			view.showMessage("For this way the gragh must be painted as a square");
+			view.showMessage("For this exercise the gragh must be required as a adyacency matrix");
 			view.showMessage("Write the size of the graph");
 			String size = view.readData();
 			int nSize = Integer.parseInt(size);
@@ -66,11 +69,27 @@ public class Controller {
 				matrixMulti[i] = Integer.parseInt(m);
 			}
 			view.showMessage("Minimum number of multiplications is "
-		            + matrix.matrixChainOrder(matrixMulti, 1, matrixMulti.length - 1));
+					+ matrix.matrixChainOrder(matrixMulti, 1, matrixMulti.length - 1));
 			break;
-
+		case "4":
+			view.showMessage("For this exercise the cities and distances must be required as a adyacency matrix");
+			view.showMessage("Write the number of the cities");
+			String cities = view.readData();
+			int nCities = Integer.parseInt(cities);
+			int[][] distances = new int[nCities][nCities];
+			for (int i = 0; i < nCities; i++) {
+				for (int j = 0; j < nCities; j++) {
+					view.showMessage("Please write the distances between each city");
+					String d = view.readData();
+					distances[i][j] = Integer.parseInt(d);
+				}
+			}
+			view.showMessage("Write the number of the city where the traveller has to begin");
+			String start = view.readData();
+			int nStart = Integer.parseInt(start);
+			int result = traveller.travel(distances, nStart);
+			view.showMessage("The distance that the traveller have to move was " + result+ " units");
 		}
 
 	}
-
 }
