@@ -47,5 +47,15 @@ public class View {
 			System.out.println();
 		}
 	}
-
+	public void printMatrix(int c[][]) {
+		for (int x = 0; x < c.length; x++) {
+			System.out.print("|");
+			for (int y = 0; y < c[x].length; y++) {
+				System.out.print(c[x][y]);
+				if (y != c[x].length - 1)
+					System.out.print("\t");
+			}
+			System.out.println("|");
+		}
+	}
 }
