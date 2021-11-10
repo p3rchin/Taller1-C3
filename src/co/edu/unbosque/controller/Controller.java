@@ -3,6 +3,7 @@ package co.edu.unbosque.controller;
 import co.edu.unbosque.model.BinomialCof;
 import co.edu.unbosque.model.Floyd;
 import co.edu.unbosque.model.MatrixChainMultiplication;
+import co.edu.unbosque.model.TaskAssignmentProblem;
 import co.edu.unbosque.model.TravellerAlgorithm;
 import co.edu.unbosque.view.View;
 
@@ -12,6 +13,7 @@ public class Controller {
 	private BinomialCof bino;
 	private MatrixChainMultiplication matrix;
 	private TravellerAlgorithm traveller;
+	private TaskAssignmentProblem task;
 	private View view;
 
 	public Controller() {
@@ -19,6 +21,7 @@ public class Controller {
 		bino = new BinomialCof();
 		matrix = new MatrixChainMultiplication();
 		traveller = new TravellerAlgorithm();
+		task = new TaskAssignmentProblem();
 		view = new View();
 		run();
 	}
@@ -56,6 +59,7 @@ public class Controller {
 			String s2 = view.readData();
 			int n2 = Integer.parseInt(s2);
 			view.showMessage("The Value of C(" + n1 + "," + n2 + ") is " + bino.binomialCoeff(n1, n2));
+			run();
 			break;
 		case "3":
 			view.showMessage("Please write the number of matrixes that you want");
@@ -70,6 +74,7 @@ public class Controller {
 			}
 			view.showMessage("Minimum number of multiplications is "
 					+ matrix.matrixChainOrder(matrixMulti, 1, matrixMulti.length - 1));
+			run();
 			break;
 		case "4":
 			view.showMessage("For this exercise the cities and distances must be required as a adyacency matrix");
@@ -88,7 +93,40 @@ public class Controller {
 			String start = view.readData();
 			int nStart = Integer.parseInt(start);
 			int result = traveller.travel(distances, nStart);
-			view.showMessage("The distance that the traveller have to move was " + result+ " units");
+			view.showMessage("The distance that the traveller have to move was " + result + " units");
+			run();
+			break;
+		case "5":
+			view.showMessage("For this exercise is required n days to evaluate the amount of tasks to do");
+			view.showMessage("Please write the number of tasks for low and high effort effort");
+			String assign = view.readData();
+			int nTask = Integer.parseInt(assign);
+			int[] low = new int[nTask];
+			int[] high = new int[nTask];
+			for (int i = 0; i < nTask; i++) {
+				view.showMessage("Please insert the effort of the low tasks");
+				String l = view.readData();
+				low[i] = Integer.parseInt(l);
+			}
+			for (int i = 0; i < nTask; i++) {
+				view.showMessage("Please insert the effort of the high tasks");
+				String h = view.readData();
+				high[i] = Integer.parseInt(h);
+			}
+			view.showMessage("Please write the day to evaluate what tasks to do");
+			int day = Integer.parseInt(view.readData());
+			view.showMessage("The maximum amount of tasks is "+task.maxTasks(high, low, day));
+			run();
+			break;
+		case "6":
+			view.showMessage("See you soon, the program was shut down");
+			System.exit(0);
+			break;
+
+		default:
+			view.showMessage("Invalid option, please try again");
+			run();
+			break;
 		}
 
 	}
