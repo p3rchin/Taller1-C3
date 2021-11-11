@@ -1,8 +1,22 @@
+/**
+ * Package containing the class
+ */
 package co.edu.unbosque.model;
-
+/**
+ * 
+ * @author Santiago Acevedo Rodríguez and Fabián Camilo Gómez Céspedes
+ *
+ */
 public class Floyd {
-	final static int INF = 9999;
 
+	/**
+	 * This method calculates the minimum distance between two nodes.
+	 * <b>pre</b>The matrix must have at least one value.<br>
+	 * <b>post</b>The matrix must change in the comparison with the original one.<br>
+	 * @param graph is an adyacency matrix. graph must be != " " and != null.
+	 * @param tam is a size of the adyacency matrix. tam != null and tam >= 0.
+	 * @return a matrix with the minimum distances.
+	 */
 	// Implementing floyd warshall algorithm
 	public int[][] floydWarshall(int graph[][], int tam) {
 		int matrix[][] = new int[tam][tam];
